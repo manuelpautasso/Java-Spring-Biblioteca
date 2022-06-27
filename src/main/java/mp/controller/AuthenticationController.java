@@ -70,8 +70,8 @@ public class AuthenticationController {
 	
 	private Usuario fromUsuarioRequestToEntity(UsuarioRequest usuarioRequest) {
 		Usuario entity = new Usuario();
-		entity.setUsername(usuarioRequest.getUsername());
-		entity.setEmail(usuarioRequest.getEmail());
+		entity.setUsername(usuarioRequest.getUsername().trim().toLowerCase());
+		entity.setEmail(usuarioRequest.getEmail().trim().toLowerCase());
 		entity.setPassword(usuarioRequest.getPassword());
 		
 		return entity;

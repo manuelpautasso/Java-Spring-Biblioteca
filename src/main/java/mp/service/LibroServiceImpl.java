@@ -6,14 +6,17 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import mp.domain.Genero;
 import mp.domain.Libro;
 import mp.exception.EntityNotFoundException;
+import mp.repository.GeneroRepository;
 import mp.repository.LibroRepository;
 
 @Service
 @AllArgsConstructor
 public class LibroServiceImpl implements LibroService{
 	private LibroRepository libroRepository;
+	private GeneroRepository generoRepository;
 	
 	@Override
 	public List<Libro> buscarTodos() {	
@@ -44,7 +47,8 @@ public class LibroServiceImpl implements LibroService{
 
 	@Override
 	public void crear(Libro libro) {
-		libroRepository.save(libro);		
+		libroRepository.save(libro);	
+		actualizarGeneros(libro);
 	}
 
 	@Override
@@ -52,6 +56,7 @@ public class LibroServiceImpl implements LibroService{
 		if(!libroRepository.existsById(libro.getId())) {
 			throw new EntityNotFoundException("El libro a actualizar no se ha encontrado en los registros.");
 		}
+		actualizarGeneros(libro);
 		libroRepository.save(libro);	
 	}
 
@@ -61,6 +66,25 @@ public class LibroServiceImpl implements LibroService{
 			throw new EntityNotFoundException("El libro a eliminar no se ha encontrado en los registros.");
 		}
 		libroRepository.deleteById(id);
+	}
+	
+	private void actualizarGeneros(Libro libro) {
+		
+		for (Genero genero : libro.getGeneros()) {
+			Optional<Genero> generoEnBD = generoRepository.findByNombre(genero.getNombre());
+			if(generoEnBD.isEmpty()) {
+				//crear genero
+				genero.agregarLibro(libro);
+				generoRepository.save(genero);
+				
+			} else {
+				//actualizamos el genero
+				genero.setLibros(generoEnBD.get().getLibros());
+				genero.agregarLibro(libro);
+				generoRepository.save(genero);
+			}
+			
+		}
 	}
 
 }
