@@ -39,6 +39,7 @@ public class Libro implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(unique = true)
 	private String nombre;
 	
 	private String descripcion;

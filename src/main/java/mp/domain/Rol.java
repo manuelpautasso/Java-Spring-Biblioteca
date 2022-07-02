@@ -2,9 +2,11 @@ package mp.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +24,7 @@ public class Rol implements Serializable{
 	@GeneratedValue
 	private int id;
 	
+	@Column(unique = true)
 	private String nombre;
 	
 	public Rol(String nombre) {
