@@ -8,4 +8,5 @@ import mp.domain.Genero;
 
 public interface GeneroRepository extends JpaRepository<Genero, Integer>{
 	Optional<Genero> findByNombre(String nombre);
+	boolean existsByNombre(String nombre);
 }

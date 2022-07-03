@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import mp.domain.Genero;
 import mp.exception.EntityNotFoundException;
+import mp.exception.InvalidArgumentException;
 import mp.repository.GeneroRepository;
 
 @Service
@@ -45,8 +46,12 @@ public class GeneroServiceImpl implements GeneroService{
 		return result.get();
 	}
 
+	//Crear o actualizar generos no puede crear libros, ni crear relaciones entre libro-genero
 	@Override
 	public void crear(Genero genero) {
+		if(generoRepository.existsByNombre(genero.getNombre())) {
+			throw new InvalidArgumentException("Ya existe un genero con ese nombre.");
+		}
 		generoRepository.save(genero);
 		
 	}
@@ -56,6 +61,7 @@ public class GeneroServiceImpl implements GeneroService{
 		if(!generoRepository.existsById(genero.getId())) {
 			throw new EntityNotFoundException("El genero a actualizar no se ha encontrado en los registros.");
 		}
+		genero.setLibros(generoRepository.findById(genero.getId()).get().getLibros());
 		generoRepository.save(genero);		
 	}
 

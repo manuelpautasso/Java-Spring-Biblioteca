@@ -58,13 +58,11 @@ public class GeneroController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> crearGenero(@RequestBody String genero){
-		log.info("Agregando el genero: " + genero);
-		Genero generoACrear = new Genero();
-		generoACrear.setNombre(genero);
-		
-		generoService.crear(generoACrear);
-		return ResponseEntity.status(HttpStatus.CREATED).body("Agregado el genero: " + genero);
+	public ResponseEntity<String> crearGenero(@RequestBody GeneroRequest genero){
+		log.info("Agregando el genero: " + genero.getNombre());
+				
+		generoService.crear(fromGeneroRequestToEntity(genero));
+		return ResponseEntity.status(HttpStatus.CREATED).body("Agregado el genero: " + genero.getNombre());
 		
 	}
 	
