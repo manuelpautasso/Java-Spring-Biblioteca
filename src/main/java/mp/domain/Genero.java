@@ -5,8 +5,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +34,9 @@ public class Genero implements Serializable{
 	@Column(unique = true)
 	private String nombre;
 	
-	@ManyToMany(mappedBy = "generos")
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
+			mappedBy = "generos")
 	private Set<Libro> libros = new HashSet<>();
 	
 	public Genero(int id, String nombre) {

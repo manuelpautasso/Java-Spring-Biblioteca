@@ -55,6 +55,11 @@ public class GeneroServiceImpl implements GeneroService{
 		generoRepository.save(genero);
 		
 	}
+	
+	@Override
+	public boolean existGenero(String nombre) {
+		return generoRepository.existsByNombre(nombre);
+	}
 
 	@Override
 	public void actualizar(Genero genero) {

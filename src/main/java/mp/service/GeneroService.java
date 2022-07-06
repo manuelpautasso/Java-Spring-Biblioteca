@@ -11,4 +11,5 @@ public interface GeneroService {
 	void crear(Genero genero);
 	void actualizar(Genero genero);
 	void eliminar(int id);
+	boolean existGenero(String nombre);
 }

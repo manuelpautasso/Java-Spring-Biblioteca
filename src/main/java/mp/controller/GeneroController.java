@@ -21,6 +21,7 @@ import mp.domain.Genero;
 import mp.dto.GeneroRequest;
 import mp.exception.InvalidArgumentException;
 import mp.service.GeneroService;
+import static mp.dto.DtoUtil.fromGeneroRequestToEntity;
 
 @RestController
 @Slf4j
@@ -86,12 +87,6 @@ public class GeneroController {
 		
 	}
 	
-	
-	private Genero fromGeneroRequestToEntity(GeneroRequest generoRequest) {
-		if(generoRequest.getNombre().isBlank()) {
-			throw new InvalidArgumentException("Argumentos invalidos o nulos para un genero.");
-		}
-		return new Genero(generoRequest.getId(), generoRequest.getNombre());
-	}
+		
 
 }

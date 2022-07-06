@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,7 +50,9 @@ public class Libro implements Serializable{
 	@Column(name = "cantidad_disponible")
 	private int cantidadDisponible;
 	
-	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	//@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@ManyToMany(fetch = FetchType.LAZY,
+			cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 	  name = "libro_genero", 
 	  joinColumns = @JoinColumn(name = "libro_id"), 

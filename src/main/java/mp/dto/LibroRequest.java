@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import mp.domain.Genero;
+import static mp.dto.DtoUtil.fromGeneroRequestToEntity;
 
 @Data
 @AllArgsConstructor
@@ -24,11 +25,8 @@ public class LibroRequest {
 	//Devuelve un Set de Generos sin libros asociados
 	public Set<Genero> getSetGeneros() {
 		Set<Genero> generosEntity = new HashSet<>();
-		for(GeneroRequest generoReq: generos) {
-			Genero genero = new Genero();
-			genero.setId(generoReq.getId());
-			genero.setNombre(generoReq.getNombre());
-			generosEntity.add(genero);
+		for(GeneroRequest generoReq: generos) {			
+			generosEntity.add(fromGeneroRequestToEntity(generoReq));
 		}
 		
 		return generosEntity;

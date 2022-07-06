@@ -23,6 +23,7 @@ import mp.domain.Libro;
 import mp.dto.LibroRequest;
 import mp.exception.InvalidArgumentException;
 import mp.service.LibroService;
+import static mp.dto.DtoUtil.fromLibroRequestToEntity;
 
 @RestController
 @Slf4j
@@ -83,17 +84,5 @@ public class LibroController {
 		return ResponseEntity.status(HttpStatus.OK).body("Libro eliminado");
 	}
 
-	private Libro fromLibroRequestToEntity(LibroRequest libroRequest) throws InvalidArgumentException {
-		if (libroRequest.getNombre() == null || libroRequest.getDescripcion() == null) {
-			throw new InvalidArgumentException("Argumentos invalidos o nulos para un libro.");
-		}
-
-		Libro libroEntity = new Libro(libroRequest.getId(), libroRequest.getNombre(), libroRequest.getDescripcion(),
-				libroRequest.getPortada(), libroRequest.getCantidadDisponible());
-		if (libroRequest.getGeneros() != null) {
-			libroEntity.setGeneros(libroRequest.getSetGeneros());
-		}
-		return libroEntity;
-	}
 
 }
