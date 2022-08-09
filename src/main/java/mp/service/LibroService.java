@@ -14,4 +14,6 @@ public interface LibroService {
 	void eliminar(int id);
 	Boolean existeLibroPorId(int libroId);
 	Boolean hayStockDisponible(int libroId);
+	void reducirEn1StockDisponible(int libroId);
+	void aumentarEn1StockDisponible(int libroId);
 }

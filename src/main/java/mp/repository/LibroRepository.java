@@ -16,4 +16,7 @@ public interface LibroRepository extends JpaRepository<Libro, Integer>{
 	
 	@Query("SELECT l.cantidadDisponible FROM Libro l WHERE l.id = ?1")
 	int stockDisponibleByLibroId(int libroId);
+	
+	@Query("UPDATE Libro l SET l.cantidadDisponible = ?2 WHERE l.id = ?1")
+	void actualizarStockDisponible(int libroId, int nuevoStock);
 }

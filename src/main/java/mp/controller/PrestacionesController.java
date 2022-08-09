@@ -105,10 +105,7 @@ public class PrestacionesController {
 		return ResponseEntity.ok(result);
 	}
 	
-	
-	/*
-	 * Queda resolver el tema de verificar la cantidad disponible
-	 */
+		
 	@PostMapping
 	public ResponseEntity<String> agregarLibro(@RequestBody PrestacionesRequest prestacionesReq) {
 		
@@ -135,11 +132,10 @@ public class PrestacionesController {
 		}
 				
 		
-		
-		//
-		// Verificar cantidades 
-		//
-				
+		//Verificar que haya stock disponible del libro
+		if(!libroService.hayStockDisponible(libro.getId())) {
+			throw new InvalidPetitionException("No hay stock disponible del libro demandado.");
+		}
 		
 		
 		log.info("Creando nueva prestacion del libro de id " + libro.getId() + " por el usuario " + usuario.get().getUsername());

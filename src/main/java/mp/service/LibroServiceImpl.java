@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import mp.domain.Genero;
 import mp.domain.Libro;
 import mp.exception.EntityNotFoundException;
+import mp.exception.InvalidPetitionException;
 import mp.repository.GeneroRepository;
 import mp.repository.LibroRepository;
 
@@ -97,12 +98,27 @@ public class LibroServiceImpl implements LibroService {
 		return libroRepository.existsById(libroId);
 	}
 
-	
-	//implementar
+
 	@Override
-	public Boolean hayStockDisponible(int libroId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Boolean hayStockDisponible(int libroId) {		
+		return 0 < libroRepository.stockDisponibleByLibroId(libroId);
+	}
+
+	@Override
+	public void reducirEn1StockDisponible(int libroId) {
+		int stockAnterior = libroRepository.stockDisponibleByLibroId(libroId);
+		if(stockAnterior <= 0) {
+			throw new InvalidPetitionException("No se puede reducir el stock de este libro");
+		}
+		
+		libroRepository.actualizarStockDisponible(libroId, stockAnterior-1);
+	}
+
+	@Override
+	public void aumentarEn1StockDisponible(int libroId) {
+		int stockAnterior = libroRepository.stockDisponibleByLibroId(libroId);		
+		
+		libroRepository.actualizarStockDisponible(libroId, stockAnterior+1);		
 	}
 
 }

@@ -20,6 +20,10 @@ public class PrestacionesServiceImpl implements PrestacionesService{
 	@Autowired
 	private PrestacionesRepository prestacionesRepo;
 	
+	@Autowired
+	private LibroService libroService;
+	
+	
 	@Override
 	public List<PrestacionesResponse> listarTodasPrestaciones() {		
 		List<Prestaciones> result = prestacionesRepo.findAll();		
@@ -61,6 +65,10 @@ public class PrestacionesServiceImpl implements PrestacionesService{
 		Prestaciones prestamo = new Prestaciones(libro, usuario);
 		
 		prestacionesRepo.save(prestamo);
+		
+		//actualizamos el stock disponible
+		libroService.reducirEn1StockDisponible(libro.getId());
+		
 	}
 
 	@Override
@@ -82,6 +90,10 @@ public class PrestacionesServiceImpl implements PrestacionesService{
 		//Actualizamos BD
 		prestacionesRepo.save(prestacion);
 		
+		//Actualizamos el stock disponible
+		int libroId = prestacion.getLibro().getId();
+		libroService.aumentarEn1StockDisponible(libroId);
+		
 	}
 	
 	@Override
@@ -102,6 +114,9 @@ public class PrestacionesServiceImpl implements PrestacionesService{
 		
 		//Actualizamos BD
 		prestacionesRepo.save(prestacion);
+		
+		//Actualizamos el stock disponible		
+		libroService.aumentarEn1StockDisponible(libroId);
 	}
 
 	@Override
