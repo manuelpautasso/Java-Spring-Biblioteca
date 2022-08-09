@@ -45,10 +45,16 @@ public class UsuarioServiceImpl implements UsuarioService{
 		
 		return usuarioRepository.save(usuario);
 	}
-
+	
 	@Override
 	public Optional<Usuario> buscarUsuarioPorUsername(String nombre) {		
 		return usuarioRepository.findByUsername(nombre);
+	}
+	
+	@Override
+	public int buscarIdUsuarioPorUsername(String nombre) {
+		Optional<Usuario> usuarioOpt = buscarUsuarioPorUsername(nombre);
+		return usuarioOpt.isPresent() ? usuarioOpt.get().getId() : 0;
 	}
 
 	@Override
@@ -66,5 +72,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		}		
 		return existe;
 	}
+
+	
 
 }

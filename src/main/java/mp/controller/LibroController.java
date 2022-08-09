@@ -40,9 +40,9 @@ public class LibroController {
 	}
 
 	@GetMapping("/buscar")
-	public ResponseEntity<Libro> encontrarLibroPorAtributo(@RequestParam Optional<String> nombre,
+	public ResponseEntity<List<Libro>> encontrarLibroPorAtributo(@RequestParam Optional<String> nombre,
 			@RequestParam Optional<String> id) {
-		Libro result;
+		List<Libro> result = new ArrayList();
 
 		if (nombre.isEmpty() && id.isEmpty()) {
 			throw new InvalidArgumentException("Los argumentos de busqueda no son validos.");
@@ -50,11 +50,11 @@ public class LibroController {
 
 		if (!id.isEmpty()) {
 			int libroId = Integer.parseInt(id.get());
-			result = libroService.buscarPorId(libroId);
 			log.info("Buscando libro por id: " + libroId);
+			result.add(libroService.buscarPorId(libroId));
 		} else {
-			result = libroService.buscarPorNombre(nombre.get());
 			log.info("Buscando libro por nombre: " + nombre.get());
+			result = libroService.buscarPorParteDeNombre(nombre.get());
 		}
 
 		return ResponseEntity.ok(result);

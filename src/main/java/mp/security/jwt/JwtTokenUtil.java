@@ -36,7 +36,7 @@ public class JwtTokenUtil {
 				.compact();
 	}
 	
-	public boolean validateAccessToken(String token) {
+	public boolean validateAccessToken(String token) {		
 		try {
 			Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
 			return true;

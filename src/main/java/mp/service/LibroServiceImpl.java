@@ -48,6 +48,16 @@ public class LibroServiceImpl implements LibroService {
 		result.get().reducirGeneros();
 		return result.get();
 	}
+	
+	@Override
+	public List<Libro> buscarPorParteDeNombre(String nombre){
+		List<Libro> result = libroRepository.findByNombreContainingIgnoreCase(nombre);
+		if(result.isEmpty()) {
+			throw new EntityNotFoundException("No se encontro ningun libro que tuviera en el nombre: " + nombre);
+		}
+		for(Libro libro: result) libro.reducirGeneros();
+		return result;
+	}
 
 	@Override
 	public void crear(Libro libro) {
@@ -78,7 +88,21 @@ public class LibroServiceImpl implements LibroService {
 		if (!libroRepository.existsById(id)) {
 			throw new EntityNotFoundException("El libro a eliminar no se ha encontrado en los registros.");
 		}
+
 		libroRepository.deleteById(id);
+	}
+
+	@Override
+	public Boolean existeLibroPorId(int libroId) {		
+		return libroRepository.existsById(libroId);
+	}
+
+	
+	//implementar
+	@Override
+	public Boolean hayStockDisponible(int libroId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

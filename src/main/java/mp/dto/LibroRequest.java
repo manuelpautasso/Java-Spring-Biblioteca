@@ -18,7 +18,7 @@ public class LibroRequest {
 	private String nombre;
 	private String descripcion;
 	private String portada;
-	private int cantidadDisponible;
+	private int cantidadInventario;
 	private Set<GeneroRequest> generos;
 	
 	

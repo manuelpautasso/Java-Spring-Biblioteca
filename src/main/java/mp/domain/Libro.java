@@ -27,13 +27,14 @@ public class Libro implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	public Libro(int id, String nombre, String descripcion, String portada, int cantidadDisponible) {
+	public Libro(int id, String nombre, String descripcion, String portada, int cantidadInventario) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.portada = portada;
-		this.cantidadDisponible = cantidadDisponible;
+		this.cantidadInventario = cantidadInventario;
+		this.cantidadDisponible = cantidadInventario;
 	}
 
 	@Id
@@ -47,10 +48,12 @@ public class Libro implements Serializable{
 	
 	private String portada;
 	
+	@Column(name = "cantidad_inventario")
+	private int cantidadInventario;
+	
 	@Column(name = "cantidad_disponible")
 	private int cantidadDisponible;
 	
-	//@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@ManyToMany(fetch = FetchType.LAZY,
 			cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
@@ -74,12 +77,6 @@ public class Libro implements Serializable{
 	
 	public void setGenerosANull() {
 		generos = null;
-	}
-	
-	
-	
-	/* Vinculos con generos y prestaciones (disponibilidad)
-	 * 		private int disponibilidad;
-	 * 		private String generos;
-	*/
+	}	
+
 }

@@ -9,5 +9,6 @@ public interface UsuarioService {
 	List<Usuario> listarUsuarios();
 	Usuario crearUsuario(Usuario usuario);
 	Optional<Usuario> buscarUsuarioPorUsername(String nombre);
+	int buscarIdUsuarioPorUsername(String nombre);
 	void agregarRolAUsuario(String username, String rolNombre);
 }
