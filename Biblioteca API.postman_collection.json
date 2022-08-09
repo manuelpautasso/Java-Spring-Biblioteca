@@ -8,7 +8,7 @@
 	},
 	"item": [
 		{
-			"name": "authentication",
+			"name": "AUTENTICACIÓN",
 			"item": [
 				{
 					"name": "Registrar usuario",
@@ -20,7 +20,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"soria\",\r\n    \"password\":\"123\",\r\n    \"email\":\"ritaa51@nqcialis.com\"\r\n}",
+							"raw": "{\r\n    \"username\":\"jocelin2\",\r\n    \"password\":\"123\",\r\n    \"email\":\"yosire07@lenfly.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -52,7 +52,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"car\",\r\n    \"password\":\"123\"   \r\n}",
+							"raw": "{\r\n    \"username\":\"manu\",\r\n    \"password\":\"123\"   \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -78,7 +78,7 @@
 			"description": "Toda petición a los endpoints de la API requieren estar autenticadas. Para la verificación de esta, se requiere mandar un token válido en cada petición."
 		},
 		{
-			"name": "libro",
+			"name": "LIBRO",
 			"item": [
 				{
 					"name": "Listar libros",
@@ -116,7 +116,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "    {        \r\n        \"nombre\": \"Rush Hour\",\r\n        \"descripcion\": \"La historia de la famosa dupla explosiva.\",\r\n        \"portada\": null,\r\n        \"cantidadDisponible\": 3\r\n    }",
+							"raw": "    {        \r\n        \"nombre\": \"El señor de los anillos\",\r\n        \"descripcion\": \"En la adormecida e idílica Comarca, un joven hobbit recibe un encargo: custodiar el Anillo Único y emprender el viaje para su destrucción en la Grieta del Destino. Acompañado por magos, hombres, elfos y enanos, atravesará la Tierra Media y se internará en las sombras de Mordor, perseguido siempre por las huestes de Sauron, el Señor Oscuro, dispuesto a recuperar su creación para establecer el dominio definitivo del Mal.\",\r\n        \"portada\": null,\r\n        \"cantidadInventario\": 5\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -138,13 +138,13 @@
 					"response": []
 				},
 				{
-					"name": "Agregar libro con generos",
+					"name": "Agregar libro con géneros",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"Mulan\",\r\n    \"descripcion\": \"Un clásico de las historias de disney.\",\r\n    \"portada\": null,\r\n    \"cantidadDisponible\": 2,\r\n    \"generos\": [\r\n        {\r\n            \"id\": 2,\r\n            \"nombre\": \"Aventura\",\r\n            \"libros\": null\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombre\": \"Comedia\",\r\n            \"libros\": null\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"id\": 0,\r\n    \"nombre\": \"La momia\",\r\n    \"descripcion\": \"Un clásico de las historias de disney.\",\r\n    \"portada\": null,\r\n    \"cantidadInventario\": 2,\r\n    \"generos\": [\r\n        {\r\n            \"id\": 4,\r\n            \"nombre\": \"Fantasia\"\r\n        },\r\n        {\r\n            \"id\": 0,\r\n            \"nombre\": \"Historico\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -181,7 +181,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/libro/5",
+							"raw": "http://localhost:8080/libro/eliminar/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -189,7 +189,8 @@
 							"port": "8080",
 							"path": [
 								"libro",
-								"5"
+								"eliminar",
+								"1"
 							]
 						}
 					},
@@ -202,7 +203,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 2,\r\n    \"nombre\": \"Mulán 2\",\r\n    \"descripcion\": \"Un clásico de las historias de disney\",\r\n    \"cantidadDisponible\": 6,\r\n    \"generos\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"Terror\",\r\n            \"libros\": null\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"nombre\": \"Comedia\",\r\n            \"libros\": null\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Rush Hour 2\",\r\n    \"descripcion\": \"La historia de la famosa dupla explosiva.\",\r\n    \"portada\": null,\r\n    \"cantidadInventario\": 3,\r\n    \"generos\": [\r\n        {\r\n            \"id\": 1,\r\n            \"nombre\": \"Hechiceria\",\r\n            \"libros\": []\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -224,12 +225,12 @@
 					"response": []
 				},
 				{
-					"name": "Buscar libro por ID",
+					"name": "Buscar libro por ID o parte del nombre",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/libro/buscar?id=1",
+							"raw": "http://localhost:8080/libro/buscar?nombre=momia",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -242,12 +243,12 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "nombre",
-									"value": "mulan 2",
-									"disabled": true
+									"value": "momia"
 								}
 							]
 						}
@@ -257,10 +258,225 @@
 			]
 		},
 		{
-			"name": "genero",
+			"name": "GÉNERO",
 			"item": [
 				{
-					"name": "Listar generos",
+					"name": "Listar géneros",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": null,\r\n    \"nombre\": \"Terror\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genero",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genero"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear género",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": null,\r\n    \"nombre\": \"Cartoon\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genero",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genero"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar género",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Hechiceria\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genero/actualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genero",
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar género",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genero/eliminar/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genero",
+								"eliminar",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar género por id o nombre",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genero/buscar?id=4&nombre=Hechiceria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genero",
+								"buscar"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4"
+								},
+								{
+									"key": "nombre",
+									"value": "Hechiceria"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PRESTACIONES",
+			"item": [
+				{
+					"name": "Listar prestaciones activas",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -275,14 +491,267 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/genero",
+							"raw": "http://localhost:8080/prestaciones",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"genero"
+								"prestaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar historial de prestaciones",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/prestaciones/historial",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prestaciones",
+								"historial"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar historial de prestaciones por usuarioId o libroId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/prestaciones/historial/buscar?libroId=21",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prestaciones",
+								"historial",
+								"buscar"
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "libroId",
+									"value": "21"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar prestaciones activas por usuarioId o libroId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/prestaciones/buscar?libroId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prestaciones",
+								"buscar"
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "libroId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Prestamo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"libroId\": 2,\r\n    \"username\": \"manu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/prestaciones",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prestaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Devolver libro por id prestacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/prestaciones/devolver",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prestaciones",
+								"devolver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Devolver libro por libroId y username",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenBiblioteca}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"libroId\": 21,\r\n    \"username\": \"jocelin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/prestaciones/devolver",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"prestaciones",
+								"devolver"
 							]
 						}
 					},
