@@ -72,6 +72,9 @@ public class GeneroServiceImpl implements GeneroService{
 
 	@Override
 	public void eliminar(int id) {
+		if(!generoRepository.existsById(id)) {
+			throw new EntityNotFoundException("El genero a eliminar no se ha encontrado en los registros.");
+		}
 		generoRepository.deleteById(id);
 	}	
 

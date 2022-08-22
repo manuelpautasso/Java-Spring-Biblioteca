@@ -12,7 +12,6 @@ import mp.domain.Genero;
 import mp.domain.Libro;
 import mp.exception.EntityNotFoundException;
 import mp.exception.InvalidPetitionException;
-import mp.repository.GeneroRepository;
 import mp.repository.LibroRepository;
 
 @Service
@@ -20,8 +19,6 @@ import mp.repository.LibroRepository;
 @Slf4j
 public class LibroServiceImpl implements LibroService {
 	private LibroRepository libroRepository;
-	private GeneroRepository generoRepository;
-	private GeneroService generoService;
 
 	@Override
 	public List<Libro> buscarTodos() {
@@ -61,9 +58,7 @@ public class LibroServiceImpl implements LibroService {
 	}
 
 	@Override
-	public void crear(Libro libro) {
-		// Asociar generos que ya existen en la BD a un libro no creado generaba
-		// problemas a la hora de guardarse
+	public void crear(Libro libro) {		
 		log.info("Ahora vamos a crear el libro: " + libro.getNombre() + " sin generos asociados.");
 		Set<Genero> generosSet = libro.getGeneros();
 		libro.setGenerosANull();

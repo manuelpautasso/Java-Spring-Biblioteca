@@ -3,6 +3,8 @@ package mp.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import lombok.AllArgsConstructor;
 import mp.domain.Rol;
 import mp.domain.Usuario;
 import mp.exception.InvalidArgumentException;
+import mp.exception.InvalidPetitionException;
 import mp.repository.RolRepository;
 import mp.repository.UsuarioRepository;
 
@@ -47,23 +50,36 @@ public class UsuarioServiceImpl implements UsuarioService{
 	}
 	
 	@Override
-	public Optional<Usuario> buscarUsuarioPorUsername(String nombre) {		
-		return usuarioRepository.findByUsername(nombre);
+	public Optional<Usuario> buscarUsuarioPorUsername(String username) {		
+		return usuarioRepository.findByUsername(username);
 	}
 	
 	@Override
-	public int buscarIdUsuarioPorUsername(String nombre) {
-		Optional<Usuario> usuarioOpt = buscarUsuarioPorUsername(nombre);
+	public int buscarIdUsuarioPorUsername(String username) {
+		Optional<Usuario> usuarioOpt = buscarUsuarioPorUsername(username);
 		return usuarioOpt.isPresent() ? usuarioOpt.get().getId() : 0;
 	}
 
 	@Override
 	public void agregarRolAUsuario(String username, String rolNombre) {
-		// TODO Auto-generated method stub
+		Optional<Usuario> usuarioBD = usuarioRepository.findByUsername(username);
+		if(usuarioBD.isEmpty()) {
+			throw new EntityNotFoundException("No se encontro ningún usuario con el username " + username);
+		}
+		Usuario usuario = usuarioBD.get();
+				
+		Rol rolBD = rolRepository.findByNombre(rolNombre);
 		
+		if(usuario.getRoles().contains(rolBD)) {
+			throw new InvalidPetitionException("El usuario ya tiene el rol que se le quiere asignar.");
+		}
+		usuario.agregarRol(rolBD);
+		
+		usuarioRepository.save(usuario);
 	}
 	
 	
+	//Busca si existe un usuario en la BD por username o email
 	private boolean existeUsuario(Usuario usuario) {
 		boolean existe = false;
 		if(usuarioRepository.findByUsername(usuario.getUsername()).isPresent() ||
